@@ -63,6 +63,7 @@ public class HorseRacingHelper {
                     int grassRating = Integer.parseInt(data[2]);
                     int dirtRating = Integer.parseInt(data[3]);
                     double preferredLength = Double.parseDouble(data[4]);
+                    
 
                     Horse horse = new Horse(name, mudRating, grassRating, dirtRating, preferredLength);
                     allHorses.add(horse);

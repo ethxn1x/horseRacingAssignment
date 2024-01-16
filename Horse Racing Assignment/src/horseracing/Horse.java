@@ -6,21 +6,24 @@ public class Horse{
         private int grassRating;
         private int dirtRating;
         private double preferredLength;
+        private double bettingODDS;
 
         private int currentPosition;
         private boolean finishedRace;
         private int number;
+        
 
-        public Horse(String name, int mudRating, int grassRating, int dirtRating, double preferredLength) {
-            this.name = name;
+        public Horse(String name, int mudRating, int grassRating, int dirtRating, double preferredLength){
             this.mudRating = mudRating;
             this.grassRating = grassRating;
             this.dirtRating = dirtRating;
             this.preferredLength = preferredLength;
             this.currentPosition = 2;
             this.finishedRace = false;
-            this.number = 0;
+            this.number = 0;        
         }
+
+
         
         public void setNumber(int number){
             this.number = number;
@@ -34,6 +37,7 @@ public class Horse{
             finishedRace = finished;
         }
 
+    
         public boolean raceFinished(){
             return finishedRace;
         }
@@ -52,7 +56,8 @@ public class Horse{
         public int getDirtRating() {
             return dirtRating;
         }
-        
+
+      
         public double getPreferredLength() {
             return preferredLength;
         }
