@@ -8,9 +8,7 @@ public class Race {
     private double raceLength; // in furlongs
     private String raceSurface; // "grass", "dirt", or "mud" (Uses HorseRacingHelper constants)
     private int currentHorse;
-
     private List<Horse> results;
-
 
     public Race(List<Horse> horses, double raceLength, String raceSurface) {
         this.horses = horses;
@@ -18,20 +16,21 @@ public class Race {
         this.raceSurface = raceSurface;
         this.currentHorse = 0;
         this.results = new ArrayList<Horse>();
+
     }
 
     public List<Horse> getHorses() {
         return horses;
     }
 
-    public int numHorses(){
+    public int numHorses() {
         return horses.size();
     }
 
-    public Horse getNextHorse(){
+    public Horse getNextHorse() {
         if (currentHorse == horses.size())
             currentHorse = 0;
-        
+
         return horses.get(currentHorse++);
     }
 
@@ -49,18 +48,19 @@ public class Race {
         System.out.println("Race Length: " + raceLength + " furlongs");
         System.out.println("List of Horses:");
         for (Horse horse : horses) {
-            System.out.println("- " + horse.getName());
+            System.out.println("- " + horse.getName() + " | Grass Rating: " + horse.getGrassRating()
+                    + " | Dirt Rating: " + horse.getDirtRating() + " | Mud Rating: " + horse.getMudRating()
+                    + " | Preferred length:" + horse.getPreferredLength());
         }
     }
 
-    public void displayResults(){
+    public void displayResults() {
         System.out.println("\n\nRace Results");
         System.out.println("------------");
-        for(int i=0; i<results.size(); i++){
-            System.out.println((i+1) + ": " + results.get(i).getName() + "("+results.get(i).getNumber()+")");
+        for (int i = 0; i < results.size(); i++) {
+            System.out.println((i + 1) + ": " + results.get(i).getName() + "(" + results.get(i).getNumber() + ")");
         }
     }
-
 
     public void startRace(){
         resetHorses();
@@ -88,11 +88,14 @@ public class Race {
 
             if (results.size() == horses.size())
                 done = true;
+            
+           
         }
 
         HorseRacingHelper.stopMusic();
     }
-    // Other methods for simulating the race, calculating winners, etc., can be added as needed
+    // Other methods for simulating the race, calculating winners, etc., can be
+    // added as needed
 
     private void resetHorses() {
         for (Horse horse : horses) {
