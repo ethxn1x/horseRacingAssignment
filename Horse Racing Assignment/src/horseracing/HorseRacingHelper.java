@@ -92,17 +92,20 @@ public class HorseRacingHelper {
 
     public static Race createRace(int numHorses, int raceType, int raceTerrain){
         double[] raceLengths;
-        if (raceType == SHORT)
+
+        int RaceType = (int)(Math.random()*3); //same thing as the terrain one but with lengths
+        if (RaceType == 1)
             raceLengths = SHORT_RACES;
-        else if (raceType == MIDDLE)
+        else if (RaceType == 2)
             raceLengths = MIDDLE_RACES;
         else
             raceLengths = LONG_RACES;
 
         String terrain = "";
-        if (raceTerrain == GRASS)
+        int RaceTerrain = (int)(Math.random()*3); // picks a number between 1 and 3 and depending on that number the terrain will be set. 
+        if (RaceTerrain == 1)
             terrain = "Grass";
-        else if (raceTerrain == DIRT)
+        else if (RaceTerrain == 2)
             terrain = "Dirt";
         else
             terrain = "Mud";
@@ -147,7 +150,7 @@ public class HorseRacingHelper {
     }
    
     public static void drawHorse(Horse horse, int width, int number){
-        // Using printf to display the formatted string with the number
+        // Using print to display the formatted string with the number
         System.out.printf("|%"+horse.getCurrentPosition()+"s%" + ((width - horse.getCurrentPosition() - 1)>1?(width - horse.getCurrentPosition() - 1):1) + "s", horse.getNumber(),"|\n");
     }
 
