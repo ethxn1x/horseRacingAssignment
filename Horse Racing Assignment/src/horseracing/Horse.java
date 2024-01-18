@@ -20,7 +20,8 @@ public class Horse{
             this.preferredLength = preferredLength;
             this.currentPosition = 2;
             this.finishedRace = false;
-            this.number = 0;        
+            this.number = 0;  
+            this.name = name;      
         }
 
 
