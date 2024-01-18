@@ -78,19 +78,25 @@ public class Race {
 
             if(horse.getDirtRating() >= horse.getGrassRating() || horse.getDirtRating() >= horse.getGrassRating() && raceSurface.equals("dirt")){
                 horse.incrementPosition((int)(Math.random()*(9-4)+4));
+                /*  if the dirt rating is greater than grass and mud rating and the race is dirt,
+                 there will be an increase for the horse with these traits*/
             }else if(horse.getGrassRating() >=horse.getMudRating() || horse.getGrassRating() >= horse.getDirtRating() && raceSurface.equals("grass")){
                 horse.incrementPosition((int)(Math.random()*(9-4)+4));
+                /*  if the grass rating is greater than mud and dirt rating and the race is grass,
+                 there will be an increase for the horse with these traits*/
             }else if (horse.getMudRating() >= horse.getGrassRating() || horse.getMudRating()>= horse.getDirtRating() && raceSurface.equals("mud")){
                 horse.incrementPosition((int)(Math.random()*(9-4)+4));
-            }else if(horse.getPreferredLength() == raceLength){
+                /*  if the mud rating is greater than grass and dirt rating and the race is mud,
+                 there will be an increase for the horse with these traits*/
+            }else if(horse.getPreferredLength() >= raceLength){
                 horse.incrementPosition((int)(Math.random()*(9-4)+4));
+                /*  if the preferred length is equal or greater to the length of the race,
+                 there will be an increase for the horse with these traits*/
             }else{
                 break;
             }
 
-            
-
-            
+        
 
            
 
