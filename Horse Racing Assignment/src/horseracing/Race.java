@@ -75,13 +75,30 @@ public class Race {
             HorseRacingHelper.clearConsole();
             HorseRacingHelper.updateTrack(numSpaces, horses);
             Horse horse = getNextHorse();
+
+            if(horse.getDirtRating() >= horse.getGrassRating() || horse.getDirtRating() >= horse.getGrassRating() && raceSurface.equals("dirt")){
+                horse.incrementPosition((int)(Math.random()*(9-4)+4));
+            }else if(horse.getGrassRating() >=horse.getMudRating() || horse.getGrassRating() >= horse.getDirtRating() && raceSurface.equals("grass")){
+                horse.incrementPosition((int)(Math.random()*(9-4)+4));
+            }else if (horse.getMudRating() >= horse.getGrassRating() || horse.getMudRating()>= horse.getDirtRating() && raceSurface.equals("mud")){
+                horse.incrementPosition((int)(Math.random()*(9-4)+4));
+            }else if(horse.getPreferredLength() == raceLength){
+                horse.incrementPosition((int)(Math.random()*(9-4)+4));
+            }else{
+                break;
+            }
+
+            
+
+            
+
            
 
             if(!horse.raceFinished() && horse.getCurrentPosition() >= numSpaces){
                 results.add(horse);
                 horse.setRaceFinished(true);
             } else if(!horse.raceFinished()){
-                horse.incrementPosition((int)(Math.random() * 4));
+                horse.incrementPosition(getIncrementForHorse(horse));
             }
 
             displayResults();
@@ -96,6 +113,20 @@ public class Race {
     }
     // Other methods for simulating the race, calculating winners, etc., can be
     // added as needed
+
+    private int getIncrementForHorse(Horse horse) {
+        horse.getDirtRating();
+        horse.getGrassRating();
+        horse.getMudRating();
+        horse.getPreferredLength();
+
+        //this.raceLength;
+        //this.raceSurface;
+        return ((int)(Math.random()*(9-4)+4));
+        
+
+        
+    }
 
     private void resetHorses() {
         for (Horse horse : horses) {

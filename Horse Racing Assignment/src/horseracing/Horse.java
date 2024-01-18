@@ -6,7 +6,7 @@ public class Horse{
         private int grassRating;
         private int dirtRating;
         private double preferredLength;
-        private double bettingODDS;
+        
 
         private int currentPosition;
         private boolean finishedRace;
