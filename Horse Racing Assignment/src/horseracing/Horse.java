@@ -6,12 +6,9 @@ public class Horse{
         private int grassRating;
         private int dirtRating;
         private double preferredLength;
-<<<<<<< HEAD
         private int WinOdds ;
         private int PlaceOdds ; 
-=======
-        
->>>>>>> 463065a9cc4ec4dfd115beb3dfb08d2abc9c2e27
+        private int ShowOdds;
 
         private int currentPosition;
         private boolean finishedRace;
@@ -25,15 +22,16 @@ public class Horse{
             this.preferredLength = preferredLength;
             this.currentPosition = 2;
             this.finishedRace = false;
-<<<<<<< HEAD
+
             this.number = 0;
             this.name = name;   
             this.WinOdds = 3; 
-            this.PlaceOdds = 4;     
-=======
+            this.PlaceOdds = 4; 
+            this.ShowOdds = 5;    
+
             this.number = 0;  
             this.name = name;      
->>>>>>> 463065a9cc4ec4dfd115beb3dfb08d2abc9c2e27
+
         }
 
 
@@ -46,11 +44,24 @@ public class Horse{
 
 
         public void MinOdd(){
-            if (this.WinOdds == 1)
+            if (this.WinOdds == 1 )
             this.WinOdds ++;
 
             if (this.WinOdds == 0)
             this.WinOdds += 2;
+
+            if (this.ShowOdds == 1 )
+            this.ShowOdds ++;
+
+            if (this.ShowOdds == 0)
+            this.ShowOdds += 2;
+
+            
+            if (this.PlaceOdds == 1 )
+            this.PlaceOdds ++;
+
+            if (this.PlaceOdds == 0)
+            this.PlaceOdds += 2;
         }
 
 
@@ -132,16 +143,57 @@ public class Horse{
         
         
 
+        public void ShowGrasslose(){
+            if (this.grassRating >= 8)
+        this.ShowOdds --;
+        }
+
+        public void ShowDirtLose(){
+            if (this.dirtRating >= 8)
+        this.ShowOdds --;
+        }
+
+        public void ShowMudlose(){
+            if (this.mudRating >= 8)
+        this.ShowOdds --;
+        }
+
+        public void ShowGrassWin(){
+            if (this.mudRating <= 6)
+        this.ShowOdds ++;
+        }
+
+        public void ShowDirtWin(){
+            if (this.dirtRating <= 6)
+        this.ShowOdds ++;
+        }
+
+        public void ShowMudWin(){
+            if (this.mudRating <= 6)
+        this.ShowOdds ++;
+        }
+
+        public void ShowCal(){
+            if (this.ShowOdds % 3 == 0 )
+            this.ShowOdds = this.ShowOdds/3;
+            
+            }
+
+
+
+
+
 
         public void addWinOdds(){
             this.WinOdds ++;
             this.PlaceOdds ++;
+            this.ShowOdds ++;
         }
 
         public void SubWinOdds(){
             this.WinOdds --;
             this.PlaceOdds --;
-
+            this.ShowOdds --;
         }
 
 
@@ -161,6 +213,9 @@ public int GetPlaceOdds(){
             return this.WinOdds;
         }
 
+        public int GetShowOdds(){
+            return this.ShowOdds; 
+        }
 
 
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.jar.Attributes.Name;
 
 public class Race {
     private List<Horse> horses;
@@ -19,6 +20,19 @@ public class Race {
     boolean show = false; 
     boolean CorrectHorse = false; 
 Scanner in = new Scanner(System.in); 
+String name = "name";
+String DirtRating = "DirtRating";
+String MudRating = "MudRating";
+String GrassRating = "GrassRating";
+String preferredLength = "preferredLength";
+String WInOdds = "WinOdds";
+String PlaceOdds = "PlaceOdds";
+String ShowOdds = "ShwoOdds";
+String WinnerHorse = "";
+
+
+
+
 
 
     public Race(List<Horse> horses, double raceLength, String raceSurface) {
@@ -30,6 +44,8 @@ Scanner in = new Scanner(System.in);
 
     }
 
+
+    
     public List<Horse> getHorses() {
         return horses;
     }
@@ -56,6 +72,8 @@ Scanner in = new Scanner(System.in);
 
 
     public void displayHorseTable(){
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("|"+"      "+ name + "                |"   + DirtRating + "| "  +GrassRating + " | " + MudRating + "   | " + preferredLength + "|   " + WInOdds + " |  " + PlaceOdds + "|   " + ShowOdds + "   |") ;
         for (int i = 0; i < horses.size(); i++) {   // iterates through the horses list
             Horse horse = horses.get(i);
            if (getRaceSurface().equals("Grass")){
@@ -63,6 +81,8 @@ Scanner in = new Scanner(System.in);
             horse.LossGrass();
             horse.PlaceGrassWin();
             horse.PlaceGrasslose();
+            horse.ShowGrassWin();
+            horse.ShowGrasslose();
            }
 
            else if(getRaceSurface().equals("Dirt")){
@@ -70,6 +90,8 @@ Scanner in = new Scanner(System.in);
             horse.LossDirt();
             horse.PlaceDirtWin();
             horse.PlaceDirtLose();
+            horse.ShowDirtWin();
+            horse.ShowDirtLose();
            }
 
            else if(getRaceSurface().equals("Mud")){
@@ -77,6 +99,8 @@ Scanner in = new Scanner(System.in);
             horse.LossMud();
             horse.PlaceMudWin();
             horse.PlaceMudlose();
+            horse.ShowMudWin();
+            horse.ShowMudlose();
            }
 
            if ( horse.getPreferredLength() == getRaceLength())
@@ -85,9 +109,9 @@ Scanner in = new Scanner(System.in);
            if( horse.getPreferredLength() != getRaceLength())
            horse.addWinOdds();
 
+           horse.PlaceCal();
+        horse.ShowCal();
         horse.MinOdd();
-        horse.PlaceCal();
-
         
 
 
@@ -98,6 +122,7 @@ Scanner in = new Scanner(System.in);
             String s5 = "" + horse.getPreferredLength();
             String s6 = "" + horse.GetWinOdds() + Win;
             String s7 = "" + horse.GetPlaceOdds();
+            String s8 = "" + horse.GetShowOdds();
             if (horse.GetPlaceOdds() == 5){
             s7 += Place;
             }
@@ -105,13 +130,21 @@ Scanner in = new Scanner(System.in);
             else {
                 s7 += Win;
             }
-        
-            System.out.println("+--------------------+-----+-----+-----+------+------+------");
-            System.out.printf("|%-20s|%5s|%5s|%5s|%5s|%5s|%5s|\n", s1, s2, s3, s4,s5, s6, s7) ;
-        }
-        System.out.println("+--------------------+-----+-----+-----+-----+-----+-----");
-    }
 
+            if (horse.GetShowOdds() == 5 || horse.GetShowOdds() == 7){
+                s8 += "-2";
+            }
+
+            else {
+                s8 += Win;
+            }
+        
+            System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+    
+            System.out.printf("|%-26s|%10s|%13s|%13s|%16s|%11s|%11s|%14s|\n", s1, s2, s3, s4,s5, s6, s7,s8) ;
+        }
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+    }
 
 
 
@@ -133,7 +166,8 @@ Scanner in = new Scanner(System.in);
         System.out.println("------------");
         for (int i = 0; i < results.size(); i++) {
             System.out.println((i + 1) + ": " + results.get(i).getName() + "(" + results.get(i).getNumber() + ")");
-        }
+
+    }
     }
 
     public void startRace(){
@@ -191,6 +225,50 @@ Scanner in = new Scanner(System.in);
        System.out.println("pick Win, Place, or Show");
         }
 
+        int v = 0;
+
+       
+        System.out.println("what horse do you want to bet on: ");
+while (v == 0){
+
+    
+    
+    String UserHorse = in.nextLine();
+    boolean Valid = false;
+
+
+
+if (UserHorse.length() > 0){
+
+
+    for( int c =0; c < horses.size(); c++){
+        Horse horseName = horses.get(c);
+
+        if (UserHorse.equals(horseName.getName())){
+            Valid = true;
+            v++;
+            WinnerHorse += UserHorse;
+            
+
+        }
+  
+
+    }
+
+    if(Valid != true)
+            System.out.println("type a vaild horse:");
+
+}
+
+
+}       
+
+    
+    
+
+
+   
+    
   
    
     
@@ -241,17 +319,20 @@ Scanner in = new Scanner(System.in);
                 horse.incrementPosition(getIncrementForHorse(horse));
             }
 
+           
+
+
             displayResults();
 
             if (results.size() == horses.size())
                 done = true;
 
 
-
+               
                 
             
             
-
+           
 
         }
     }
