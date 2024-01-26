@@ -18,6 +18,8 @@ public class Race {
     boolean win = false;
     boolean place = false; 
     boolean show = false; 
+    boolean Box = false;
+    boolean Exacta = false;
     boolean CorrectHorse = false; 
 Scanner in = new Scanner(System.in); 
 String name = "name";
@@ -203,7 +205,7 @@ String WinnerHorse = "";
         }
         int b = 0;
         while (b == 0){ // while loop that will run until you type Win, place or show
-       System.out.println("would you like to bet Win, Place, or Show:");
+       System.out.println("would you like to bet Win, Place, Show, Boxing, Exacta");
        String BetPlace = in.next();
       
        if ( BetPlace.equals("Win")){
@@ -221,18 +223,27 @@ String WinnerHorse = "";
        b++;
        }
 
-       else 
-       System.out.println("pick Win, Place, or Show");
+       else if (BetPlace.equals("Boxing")){
+        Box = true; 
+        b++;
         }
 
+        else if (BetPlace.equals("Exacta")){
+        Exacta = true; 
+        b++;
+            }
+
+       else{ 
+       System.out.println("pick Win, Place, Show, Boxing, Exacta");
+        }
+    }
         int v = 0;
 
        
         System.out.println("what horse do you want to bet on: ");
+        
 while (v == 0){
-
-    
-    
+     
     String UserHorse = in.nextLine();
     boolean Valid = false;
 
@@ -240,40 +251,100 @@ while (v == 0){
 
 if (UserHorse.length() > 0){
 
-
-    for( int c =0; c < horses.size(); c++){
+    for( int c = 0; c < horses.size(); c++){
         Horse horseName = horses.get(c);
 
         if (UserHorse.equals(horseName.getName())){
             Valid = true;
             v++;
             WinnerHorse += UserHorse;
-            
-
         }
   
 
     }
-
     if(Valid != true)
             System.out.println("type a vaild horse:");
 
+}       
+}
+ 
+ //boxing and exacta   
+int e = 0;
+
+    if(Box == true && Exacta == false){
+    while(e==0){
+        System.out.println("which horse do you want to pick for first or second ");
+        String UserHorse1 = in.nextLine();
+        boolean Valid = false;
+        System.out.println("which second horse do you want to pick for first or second ");
+        String UserHorse2 = in.nextLine();
+        
+
+        for( int c = 0; c < horses.size(); c++){
+            Horse horseName = horses.get(c);
+    
+            if (UserHorse1.equals(horseName.getName())){
+                Valid = true;
+                e++;
+                WinnerHorse += UserHorse1;
+            }
+
+        for( int f = 0; f < horses.size(); f++){
+            Horse horseName1 = horses.get(c);
+        
+             if (UserHorse1.equals(horseName1.getName())){
+                Valid = true;
+                e++;
+                WinnerHorse += UserHorse2;
+                }
+      
+    
+        }
+        if(Valid != true)
+                System.out.println("type a vaild horse:");
+
+
+    }
 }
 
+    int d = 0;
+    if(Box == false && Exacta == true){
+        while(d==0){
+        System.out.println("which horse do you want to pick for first or second ");
+        String UserHorse1 = in.nextLine();
+        boolean Valid = false;
+        System.out.println("which second horse do you want to pick for first or second ");
+        String UserHorse2 = in.nextLine();
 
-}       
+        for( int c = 0; c < horses.size(); c++){
+            Horse horseName = horses.get(c);
+    
+            if (UserHorse1.equals(horseName.getName())){
+                Valid = true;
+                d++;
+                WinnerHorse += UserHorse1;
+            }
 
+        for( int f = 0; f < horses.size(); f++){
+            Horse horseName1 = horses.get(c);
+        
+             if (UserHorse1.equals(horseName1.getName())){
+                Valid = true;
+                d++;
+                WinnerHorse += UserHorse2;
+                }
+      
+    
+        }
+        if(Valid != true)
+                System.out.println("type a vaild horse:");
+
+
+    }
+    }
+    //end of boxing and exacta
     
     
-
-
-   
-    
-  
-   
-    
- 
-
 
         resetHorses();
         int numSpaces = (int)(raceLength*10);
@@ -288,7 +359,7 @@ if (UserHorse.length() > 0){
             HorseRacingHelper.updateTrack(numSpaces, horses);
             Horse horse = getNextHorse();
 
-            if(horse.getDirtRating() >= horse.getGrassRating() || horse.getDirtRating() >= horse.getGrassRating() && raceSurface.equals("dirt")){
+            if(horse.getDirtRating() >= horse.getGrassRating() || horse.getDirtRating() >= horse.getMudRating() && raceSurface.equals("dirt")){
                 horse.incrementPosition((int)(Math.random()*(9-4)+4));
                 /*  if the dirt rating is greater than grass and mud rating and the race is dirt,
                  there will be an increase for the horse with these traits*/
@@ -300,7 +371,7 @@ if (UserHorse.length() > 0){
                 horse.incrementPosition((int)(Math.random()*(9-4)+4));
                 /*  if the mud rating is greater than grass and dirt rating and the race is mud,
                  there will be an increase for the horse with these traits*/
-            }else if(horse.getPreferredLength() >= raceLength){
+            }else if(horse.getPreferredLength() == raceLength){
                 horse.incrementPosition((int)(Math.random()*(9-4)+4));
                 /*  if the preferred length is equal or greater to the length of the race,
                  there will be an increase for the horse with these traits*/
@@ -337,6 +408,8 @@ if (UserHorse.length() > 0){
         }
     }
         HorseRacingHelper.stopMusic();
+}
+        }
     }
     // Other methods for simulating the race, calculating winners, etc., can be
     // added as needed
