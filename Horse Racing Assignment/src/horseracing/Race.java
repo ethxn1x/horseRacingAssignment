@@ -1,7 +1,9 @@
 package horseracing;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Race {
     private List<Horse> horses;
@@ -9,6 +11,15 @@ public class Race {
     private String raceSurface; // "grass", "dirt", or "mud" (Uses HorseRacingHelper constants)
     private int currentHorse;
     private List<Horse> results;
+    private String Win = "-1";
+    private String Place = "-2";
+    int wallet = 100; 
+    boolean win = false;
+    boolean place = false; 
+    boolean show = false; 
+    boolean CorrectHorse = false; 
+Scanner in = new Scanner(System.in); 
+
 
     public Race(List<Horse> horses, double raceLength, String raceSurface) {
         this.horses = horses;
@@ -42,17 +53,80 @@ public class Race {
         return raceSurface;
     }
 
+
+
+    public void displayHorseTable(){
+        for (int i = 0; i < horses.size(); i++) {   // iterates through the horses list
+            Horse horse = horses.get(i);
+           if (getRaceSurface().equals("Grass")){
+            horse.WinGrass();
+            horse.LossGrass();
+            horse.PlaceGrassWin();
+            horse.PlaceGrasslose();
+           }
+
+           else if(getRaceSurface().equals("Dirt")){
+            horse.WinDirt();
+            horse.LossDirt();
+            horse.PlaceDirtWin();
+            horse.PlaceDirtLose();
+           }
+
+           else if(getRaceSurface().equals("Mud")){
+            horse.WinMud();
+            horse.LossMud();
+            horse.PlaceMudWin();
+            horse.PlaceMudlose();
+           }
+
+           if ( horse.getPreferredLength() == getRaceLength())
+           horse.SubWinOdds();
+
+           if( horse.getPreferredLength() != getRaceLength())
+           horse.addWinOdds();
+
+        horse.MinOdd();
+        horse.PlaceCal();
+
+        
+
+
+            String s1 = "" + horse.getName();
+            String s2 = "" + horse.getDirtRating();
+            String s3 = "" + horse.getGrassRating();
+            String s4 = "" + horse.getMudRating();
+            String s5 = "" + horse.getPreferredLength();
+            String s6 = "" + horse.GetWinOdds() + Win;
+            String s7 = "" + horse.GetPlaceOdds();
+            if (horse.GetPlaceOdds() == 5){
+            s7 += Place;
+            }
+            
+            else {
+                s7 += Win;
+            }
+        
+            System.out.println("+--------------------+-----+-----+-----+------+------+------");
+            System.out.printf("|%-20s|%5s|%5s|%5s|%5s|%5s|%5s|\n", s1, s2, s3, s4,s5, s6, s7) ;
+        }
+        System.out.println("+--------------------+-----+-----+-----+-----+-----+-----");
+    }
+
+
+
+
+
+
+
     public void displayRaceInfo() {
         System.out.println("Race Information:");
         System.out.println("Race Surface: " + raceSurface);
         System.out.println("Race Length: " + raceLength + " furlongs");
         System.out.println("List of Horses:");
-        for (Horse horse : horses) {
-            System.out.println("- " + horse.getName() + " | Grass Rating: " + horse.getGrassRating()
-                    + " | Dirt Rating: " + horse.getDirtRating() + " | Mud Rating: " + horse.getMudRating()
-                    + " | Preferred length:" + horse.getPreferredLength());
-        }
-    }
+ 
+
+    displayHorseTable();
+     }
 
     public void displayResults() {
         System.out.println("\n\nRace Results");
@@ -63,6 +137,66 @@ public class Race {
     }
 
     public void startRace(){
+
+        System.out.println("would you like to bet? : (y/n) ");
+        String betResult = in.nextLine();
+
+        if (betResult.equals("y")){
+
+            int i = 0;
+
+            while(i <= 0 ){ //loop that will keep on running until valid number has been entered. 
+             try {
+                       System.out.println("how much would you like to bet:"); 
+            int BetAmount = in.nextInt(); // ask user how much they want to bet and saves that amount in variable BetAmount
+
+             if (BetAmount > wallet) // checks the the amount in BetAmount if greater then what you have in wallet then a message will print, user will then be able to input new amount. 
+            System.out.println("you don't have enough money you poor");
+
+            if (BetAmount <= 0) // if player bets a number below or equal to zero a message will appear and player will be able to rebet. 
+            System.out.println("pick a number that is greater than 0:");
+
+
+            if (BetAmount > 0 && BetAmount <= wallet) // if bet amount if within range of the wallet amount and greater then 0 the while loop will stop 
+            i ++; 
+            
+             } catch (InputMismatchException e) { // makes sure that user can only type numbers and no other charcter if user attempts to type latter or special character a message will appear. 
+
+                System.out.println("pick a number not a letter idiot"); 
+                in.next(); // clears the scanner buffer, this prevents the program from getting stuck in a infinite loop due to the invald input in the buffer. 
+             }     
+
+        }
+        int b = 0;
+        while (b == 0){ // while loop that will run until you type Win, place or show
+       System.out.println("would you like to bet Win, Place, or Show:");
+       String BetPlace = in.next();
+      
+       if ( BetPlace.equals("Win")){
+        win = true; 
+        b++; //loop will stop when you type either Win, Place, and Show 
+       }
+    
+       else if (BetPlace.equals("Place")){
+       place = true;
+       b++;
+       }
+
+       else if (BetPlace.equals("Show")){
+       show = true; 
+       b++;
+       }
+
+       else 
+       System.out.println("pick Win, Place, or Show");
+        }
+
+  
+   
+    
+ 
+
+
         resetHorses();
         int numSpaces = (int)(raceLength*10);
         boolean done = false;
@@ -88,10 +222,16 @@ public class Race {
 
             if (results.size() == horses.size())
                 done = true;
-            
-           
-        }
 
+
+
+                
+            
+            
+
+
+        }
+    }
         HorseRacingHelper.stopMusic();
     }
     // Other methods for simulating the race, calculating winners, etc., can be

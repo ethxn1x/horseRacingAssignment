@@ -149,7 +149,7 @@ public class HorseRacingHelper {
         }
     }
    
-    public static void drawHorse(Horse horse, int width, int number){
+    public static void   drawHorse(Horse horse, int width, int number){
         // Using print to display the formatted string with the number
         System.out.printf("|%"+horse.getCurrentPosition()+"s%" + ((width - horse.getCurrentPosition() - 1)>1?(width - horse.getCurrentPosition() - 1):1) + "s", horse.getNumber(),"|\n");
     }
@@ -219,6 +219,18 @@ public class HorseRacingHelper {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 
             // Get the format of the audio file
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
             AudioFormat format = audioStream.getFormat();
 
             // Set up the source data line to play the audio
