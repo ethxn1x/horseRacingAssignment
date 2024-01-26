@@ -6,8 +6,12 @@ public class Horse{
         private int grassRating;
         private int dirtRating;
         private double preferredLength;
+<<<<<<< HEAD
         private int WinOdds ;
         private int PlaceOdds ; 
+=======
+        
+>>>>>>> 463065a9cc4ec4dfd115beb3dfb08d2abc9c2e27
 
         private int currentPosition;
         private boolean finishedRace;
@@ -21,10 +25,15 @@ public class Horse{
             this.preferredLength = preferredLength;
             this.currentPosition = 2;
             this.finishedRace = false;
+<<<<<<< HEAD
             this.number = 0;
             this.name = name;   
             this.WinOdds = 3; 
             this.PlaceOdds = 4;     
+=======
+            this.number = 0;  
+            this.name = name;      
+>>>>>>> 463065a9cc4ec4dfd115beb3dfb08d2abc9c2e27
         }
 
 
