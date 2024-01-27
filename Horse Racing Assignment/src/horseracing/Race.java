@@ -31,6 +31,9 @@ String WInOdds = "WinOdds";
 String PlaceOdds = "PlaceOdds";
 String ShowOdds = "ShwoOdds";
 String WinnerHorse = "";
+String WinnerHorse1 = "";
+String WinnerHorse2 = "";
+
 
 
 
@@ -286,7 +289,7 @@ int e = 0;
             if (UserHorse1.equals(horseName.getName())){
                 Valid = true;
                 e++;
-                WinnerHorse += UserHorse1;
+                WinnerHorse1 += UserHorse1;
             }
 
         for( int f = 0; f < horses.size(); f++){
@@ -295,7 +298,7 @@ int e = 0;
              if (UserHorse1.equals(horseName1.getName())){
                 Valid = true;
                 e++;
-                WinnerHorse += UserHorse2;
+                WinnerHorse2 += UserHorse2;
                 }
       
     
@@ -322,7 +325,7 @@ int e = 0;
             if (UserHorse1.equals(horseName.getName())){
                 Valid = true;
                 d++;
-                WinnerHorse += UserHorse1;
+                WinnerHorse1 += UserHorse1;
             }
 
         for( int f = 0; f < horses.size(); f++){
@@ -331,7 +334,7 @@ int e = 0;
              if (UserHorse1.equals(horseName1.getName())){
                 Valid = true;
                 d++;
-                WinnerHorse += UserHorse2;
+                WinnerHorse2 += UserHorse2;
                 }
       
     
